@@ -46,11 +46,11 @@ public class Server {
 			try {
 				Socket socket = serverSocket.accept();
 				if (playerState < 3) {
-					if (playerState == 0) {
+					if (playerState == 0 || playerState == 2) {
 						pool.execute(new Handler(socket, 'x'));
 						System.out.println("Connected to client X");
 						playerState++;
-					} else if (playerState == 1) {
+					} else {
 						pool.execute(new Handler(socket, 'o'));
 						System.out.println("Connected to client O");
 						playerState += 2;
@@ -85,13 +85,8 @@ public class Server {
 
 				System.out.println("Server Received: " + message[0]);
 
-				// if (playerState < 3) {
-				// 	output.println("otherDisconnect");
-				// 	return false;
-				// }
-
 				if (message[0].equals("newGame")) {
-					currentPlayer = 0;
+					currentPlayer -= 1;
 					break;
 				} else if (message[0].equals("move")) {
 					if (game.getCurrentPlayer() != player) {
@@ -109,18 +104,12 @@ public class Server {
 							for (PrintWriter writer : writers) {
 								writer.println("win " + game.getCurrentPlayer());
 							}
-							break;
 						} else if (game.isBoardFull()) {
 							for (PrintWriter writer : writers) {
 								writer.println("tie");
 							}
-							break;
 						}
 						game.changePlayer();
-						// // notify other player
-						// for (PrintWriter writer : writers) {
-						// writer.println("playerSwitch " + game.getCurrentPlayer());
-						// }
 					} else if (message[0].equals("disconnect")) {
 						return true;
 					} else {
@@ -174,9 +163,11 @@ public class Server {
 					writers.remove(output);
 				}
 				playerState -= player == 'x' ? 1 : 2;
+				currentPlayer -= 1;
 				for (PrintWriter writer : writers) {
 					writer.println("otherDisconnect");
 				}
+
 			}
 		}
 	}
