@@ -24,21 +24,15 @@ public class Controller {
 	private Scanner in;
 	private PrintWriter out;
 	private char player;
+	private String ip;
 
-	final String helpInfo = """
-			Some information about the game:
-			Criteria for a valid move:
-			The move is not occupied by any mark.
-			The move is made in the player's turn.
-			The move is made within the 3 x 3 board.
-			The game would continue and switch among the opposite player until it reaches either one of the following conditions:
-			-Player 1 wins.
-			-Player 2 wins.
-			-Draw.
-			""";
+	final String helpInfo = "Some information about the game:\nCriteria for a valid move:\nThe move is not occupied by any mark.\nThe move is made in the player's turn.\nThe move is made within the 3 x 3 board.\nThe game would continue and switch among the opposite player until it reaches either one of the following conditions:\n-Player 1 wins.\n-Player 2 wins.\n-Draw.";
 
-	public Controller(View view) {
+
+
+	public Controller(View view, String ip) {
 		this.view = view;
+		this.ip = ip;
 	}
 
 	public void newTurn() {
@@ -59,7 +53,7 @@ public class Controller {
 		view.getSubmitButton().setEnabled(false);
 		view.getInputField().setEnabled(false);
 		try {
-			this.socket = new Socket("127.0.0.1", 12396);
+			this.socket = new Socket(ip, 12396);
 			this.in = new Scanner(socket.getInputStream());
 			this.out = new PrintWriter(socket.getOutputStream(), true);
 		} catch (UnknownHostException e) {
