@@ -15,6 +15,8 @@ FROM openjdk:8-jre-alpine
 COPY --from=build /usr/src/app/app.jar /usr/app/app.jar
 # set working directory
 WORKDIR /usr/app
+# turn on X11 display
+ENV DISPLAY :0
 # run jar
 ENTRYPOINT ["java", "-jar", "app.jar"]
 
