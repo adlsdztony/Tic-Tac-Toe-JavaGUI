@@ -27,7 +27,7 @@ public class Server {
 			}
 		}));
 
-		try (var listener = new ServerSocket(12396)) {
+		try (ServerSocket listener = new ServerSocket(12396)) {
 			Server myServer = new Server(listener);
 			myServer.start();
 		} catch (Exception e) {
