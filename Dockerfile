@@ -4,8 +4,8 @@ COPY . /usr/src/app
 # set working directory
 WORKDIR /usr/src/app
 # build jar
-RUN javac -d classes .\src\ass4\*
-RUN jar --create --file app.jar --manifest .\MANIFEST.MF -C classes .
+RUN javac -d classes ./src/ass4/*
+RUN jar --create --file app.jar --manifest ./MANIFEST.MF -C classes .
 
 
 # Path: Dockerfile
