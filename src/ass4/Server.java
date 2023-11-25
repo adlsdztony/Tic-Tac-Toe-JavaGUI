@@ -3,6 +3,7 @@ package ass4;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -41,7 +42,7 @@ public class Server {
 	}
 
 	public void start() {
-		var pool = Executors.newFixedThreadPool(200);
+		ExecutorService pool = Executors.newFixedThreadPool(200);
 		while (true) {
 			try {
 				Socket socket = serverSocket.accept();
