@@ -6,7 +6,7 @@ WORKDIR /usr/src/app
 # build jar
 RUN mkdir classes
 RUN javac -d classes ./src/ass4/*
-RUN jar --create --file app.jar --manifest ./MANIFEST.MF -C classes .
+RUN jar cfe app.jar ass4.Main -C classes .
 
 
 # Path: Dockerfile
