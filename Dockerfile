@@ -17,6 +17,7 @@ COPY --from=build /usr/src/app/app.jar /usr/app/app.jar
 WORKDIR /usr/app
 # turn on X11 display
 ENV DISPLAY :0
+RUN apk add --no-cache libxext libxrender libxtst
 # run jar
 ENTRYPOINT ["java", "-jar", "app.jar"]
 
