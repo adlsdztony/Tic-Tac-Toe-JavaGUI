@@ -24,7 +24,7 @@ RUN apk add --no-cache xorg-server
 CMD ["Xorg", "-ac", ":0", "-listen", "tcp"]
 
 # run jar
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar", "server"]
 
 
 
