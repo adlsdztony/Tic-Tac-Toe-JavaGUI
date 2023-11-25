@@ -18,6 +18,11 @@ WORKDIR /usr/app
 # turn on X11 display
 ENV DISPLAY :0
 RUN apk add --no-cache libxext libxrender libxtst
+# install x11
+RUN apk add --no-cache xorg-server
+# run x11
+CMD ["Xorg", "-ac", ":0", "-listen", "tcp"]
+
 # run jar
 ENTRYPOINT ["java", "-jar", "app.jar"]
 
