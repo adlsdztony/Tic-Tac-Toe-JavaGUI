@@ -1,4 +1,4 @@
-package ass4;
+package client;
 
 import java.awt.Color;
 import java.awt.Container;
@@ -14,6 +14,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import game.Board;
 
 
 public class View {

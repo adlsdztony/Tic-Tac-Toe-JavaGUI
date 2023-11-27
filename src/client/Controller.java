@@ -1,4 +1,4 @@
-package ass4;
+package client;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -223,13 +223,13 @@ public class Controller {
 					} else if (message[0].equals("otherDisconnect")) {
 						view.getInfoLabel().setText("The other player has disconnected.");
 						int opt = JOptionPane.showConfirmDialog(view.getFrame(),
-								"The other player has disconnected. Do you want to wait?", "Game over",
+								"The other player has disconnected. Do you want to leave?", "Game over",
 								JOptionPane.YES_NO_OPTION);
 						if (opt == JOptionPane.YES_OPTION) {
-							out.println("newGame");
-						} else {
 							out.println("disconnect");
 							System.exit(0);
+						} else {
+							out.println("newGame");
 						}
 						newTurn();
 					}

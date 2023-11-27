@@ -1,5 +1,5 @@
 
-package ass4;
+package game;
 
 public class TicTacToe {
     // map of the board

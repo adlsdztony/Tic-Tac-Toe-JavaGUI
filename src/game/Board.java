@@ -1,4 +1,4 @@
-package ass4;
+package game;
 
 public class Board {
     private char[][] board;
