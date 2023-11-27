@@ -67,7 +67,7 @@ public class Controller {
 				int x = e.getX() / 100;
 				int y = e.getY() / 100;
 				out.println("move " + y + " " + x);
-				System.out.println("move " + y + " " + x);
+				// System.out.println("move " + y + " " + x);
 			}
 
 			public void mousePressed(java.awt.event.MouseEvent e) {

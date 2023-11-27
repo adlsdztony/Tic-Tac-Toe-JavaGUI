@@ -87,7 +87,7 @@ public class Server {
 			while (input.hasNextLine()) {
 				String[] message = input.nextLine().split(" ");
 
-				System.out.println("Server Received: " + message[0]);
+				// System.out.println("Server Received: " + message[0]);
 
 				if (message[0].equals("newGame")) {
 					currentPlayer -= 1;
@@ -140,10 +140,10 @@ public class Server {
 
 				while (input.hasNextLine()) {
 					String[] message = input.nextLine().split(" ");
-					System.out.println("Server Received: " + message[0]);
+					// System.out.println("Server Received: " + message[0]);
 					
 					if (message[0].equals("start")) {
-						System.out.println("Server Sent: start " + player);
+						// System.out.println("Server Sent: start " + player);
 						currentPlayer += 1;
 						while (currentPlayer < 2) {
 							Thread.sleep(100);
