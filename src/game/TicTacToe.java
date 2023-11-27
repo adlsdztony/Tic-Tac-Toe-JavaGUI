@@ -123,8 +123,8 @@ public class TicTacToe {
     /**
      * Make a move
      * 
-     * @param row
-     * @param col
+     * @param row the row of the move
+     * @param col the column of the move
      * @return true if the move is valid
      */
     public synchronized boolean makeMove(int row, int col) {
@@ -134,18 +134,11 @@ public class TicTacToe {
     /**
      * Make a move
      * 
-     * @param position
+     * @param position the position of the move
      * @return true if the move is valid
      */
     public synchronized boolean makeMove(int position) {
         return board.makeMove(position, currentPlayer);
     }
 
-    /**
-     * Print the board
-     */
-    public void printBoard() {
-        // print board
-        board.printBoard();
-    }
 }

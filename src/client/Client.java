@@ -15,7 +15,7 @@ public class Client {
 	 * main function
 	 * take the ip address as the argument
 	 * 
-	 * @param args
+	 * @param args the ip address of the server
 	 */
 	public static void main(String[] args) {
 		String ip;

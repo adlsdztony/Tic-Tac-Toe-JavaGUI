@@ -1,8 +1,8 @@
 package game;
 
 /**
- * TicTacToe class
- * It contains the board and the current player.
+ * game.Board class
+ * a board of the game
  * 
  * @author Zhou Zilong
  * @since 2023-11-27
@@ -31,8 +31,8 @@ public class Board {
     /**
      * Get the mark at the given position
      * 
-     * @param row
-     * @param col
+     * @param row the row of the position
+     * @param col the column of the position
      * @return the mark at the given position
      */
     public synchronized char getMark(int row, int col) {
@@ -70,9 +70,12 @@ public class Board {
     }
 
     /**
-     * Check if the board is full
+     * Make a move
      * 
-     * @return true if the board is full
+     * @param row the row of the move
+     * @param col the column of the move
+     * @param currentPlayer the current player
+     * @return true if the move is valid
      */
     public synchronized boolean makeMove(int row, int col, char currentPlayer) {
         // place mark
@@ -88,9 +91,11 @@ public class Board {
     }
 
     /**
-     * Check if the board is full
+     * Make a move
      * 
-     * @return true if the board is full
+     * @param position the position of the move
+     * @param currentPlayer the current player
+     * @return true if the move is valid
      */
     public synchronized boolean makeMove(int position, char currentPlayer) {
         // place mark
@@ -102,21 +107,4 @@ public class Board {
         return false;
     }
 
-    /**
-     * Check if the board is full
-     * 
-     * @return true if the board is full
-     */
-    public void printBoard() {
-        // print board
-        System.out.println("-------------");
-        for (int i = 0; i < 3; i++) {
-            System.out.print("| ");
-            for (int j = 0; j < 3; j++) {
-                System.out.print(board[i][j] + " | ");
-            }
-            System.out.println();
-            System.out.println("-------------");
-        }
-    }
 }

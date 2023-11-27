@@ -106,7 +106,7 @@ public class View {
     /**
      * Show the message
      * 
-     * @param message
+     * @param message the message to be shown
      */
     public void showMessage(String message) {
         JOptionPane.showMessageDialog(frame, message);
@@ -166,7 +166,7 @@ public class View {
         /**
          * Draw the board
          * 
-         * @param g
+         * @param g the graphics
          */
         private void drawBoard(Graphics g) {
             // draw the board
@@ -191,9 +191,9 @@ public class View {
         /**
          * Draw the mark
          * 
-         * @param g
-         * @param row
-         * @param col
+         * @param g the graphics
+         * @param row the row of the mark
+         * @param col the column of the mark
          */
         private void drawMark(Graphics g, int row, int col) {
             // draw the marks

@@ -40,8 +40,8 @@ public class Controller {
 	 * Constructor
 	 * Initialize the controller
 	 * 
-	 * @param view
-	 * @param ip
+	 * @param view the view
+	 * @param ip  the ip address of the server
 	 */
 	public Controller(View view, String ip) {
 		this.view = view;
@@ -154,7 +154,7 @@ public class Controller {
 		 * Constructor
 		 * Initialize the handler
 		 * 
-		 * @param socket
+		 * @param socket the socket
 		 */
 		public ClinetHandler(Socket socket) {
 			this.socket = socket;
@@ -175,7 +175,7 @@ public class Controller {
 		/**
 		 * Read from the server
 		 * 
-		 * @throws Exception
+		 * @throws Exception if failed to read from the server
 		 */
 		public void readFromServer() throws Exception {
 			try {
@@ -234,7 +234,7 @@ public class Controller {
 							out.println("newGame");
 						} else {
 							out.println("disconnect");
-							System.exit(0);
+							break;
 						}
 						newTurn();
 					} else if (message[0].equals("tie")) {
@@ -245,7 +245,7 @@ public class Controller {
 							out.println("newGame");
 						} else {
 							out.println("disconnect");
-							System.exit(0);
+							break;
 						}
 						newTurn();
 					} else if (message[0].equals("otherDisconnect")) {
@@ -255,7 +255,7 @@ public class Controller {
 								JOptionPane.YES_NO_OPTION);
 						if (opt == JOptionPane.YES_OPTION) {
 							out.println("disconnect");
-							System.exit(0);
+							break;
 						} else {
 							out.println("newGame");
 						}
@@ -266,6 +266,7 @@ public class Controller {
 				e.printStackTrace();
 			} finally {
 				socket.close();
+				System.exit(0);
 			}
 		}
 	}

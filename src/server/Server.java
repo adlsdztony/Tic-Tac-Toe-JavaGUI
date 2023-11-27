@@ -35,7 +35,7 @@ public class Server {
 	/**
 	 * Runs the application. Pairs up clients that connect.
 	 * 
-	 * @param args
+	 * @param args the command line arguments
 	 */
 	public static void main(String[] args) {
 		System.out.println("Server is Running...");
@@ -56,7 +56,7 @@ public class Server {
 	/**
 	 * Constructs a Server object.
 	 * 
-	 * @param serverSocket
+	 * @param serverSocket the server socket
 	 */
 	public Server(ServerSocket serverSocket) {
 		this.serverSocket = serverSocket;
@@ -108,8 +108,8 @@ public class Server {
 		 * Constructs a handler thread, squirreling away the socket. All the
 		 * interesting work is done in the run method.
 		 * 
-		 * @param socket
-		 * @param player
+		 * @param socket the socket
+		 * @param player the player type
 		 */
 		public Handler(Socket socket, char player) {
 			this.socket = socket;
@@ -126,10 +126,13 @@ public class Server {
 			while (input.hasNextLine()) {
 				String[] message = input.nextLine().split(" ");
 
-				// System.out.println("Server Received: " + message[0]);
+				System.out.println("Server Received: " + message[0]);
 
 				if (message[0].equals("newGame")) {
 					currentPlayer -= 1;
+					if (currentPlayer < 0) {
+						currentPlayer = 0;
+					}
 					break;
 				} else if (message[0].equals("move")) {
 					if (game.getCurrentPlayer() != player) {
@@ -185,13 +188,24 @@ public class Server {
 
 				while (input.hasNextLine()) {
 					String[] message = input.nextLine().split(" ");
-					// System.out.println("Server Received: " + message[0]);
+					System.out.println("Server Received: " + message[0]);
 
 					if (message[0].equals("start")) {
 						// System.out.println("Server Sent: start " + player);
 						currentPlayer += 1;
 						while (currentPlayer < 2) {
 							Thread.sleep(100);
+							// check if this client disconnects with no block
+							if (socket.getInputStream().available() > 0) {
+								message = input.nextLine().split(" ");
+								if (message[0].equals("disconnect")) {
+									currentPlayer -= 1;
+									if (currentPlayer < 0) {
+										currentPlayer = 0;
+									}
+									break;
+								}
+							}
 						}
 						output.println("start " + player);
 
@@ -214,6 +228,9 @@ public class Server {
 				}
 				playerState -= player == 'x' ? 1 : 2;
 				currentPlayer -= 1;
+				if (currentPlayer < 0) {
+					currentPlayer = 0;
+				}
 				for (PrintWriter writer : writers) {
 					writer.println("otherDisconnect");
 				}
