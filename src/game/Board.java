@@ -1,21 +1,47 @@
 package game;
 
+/**
+ * TicTacToe class
+ * It contains the board and the current player.
+ * 
+ * @author Zhou Zilong
+ * @since 2023-11-27
+ */
 public class Board {
     private char[][] board;
 
+    /**
+     * Constructor
+     * Initialize the game
+     */
     public Board() {
         board = new char[3][3];
         initializeBoard();
     }
 
+    /**
+     * Get the board
+     * 
+     * @return the board
+     */
     public synchronized char[][] getBoard() {
         return board;
     }
 
+    /**
+     * Get the mark at the given position
+     * 
+     * @param row
+     * @param col
+     * @return the mark at the given position
+     */
     public synchronized char getMark(int row, int col) {
         return board[row][col];
     }
 
+    /**
+     * Initialize the board
+     */
     public void initializeBoard() {
         // initialize board
         for (int i = 0; i < 3; i++) {
@@ -25,6 +51,11 @@ public class Board {
         }
     }
 
+    /**
+     * Check if the board is full
+     * 
+     * @return true if the board is full
+     */
     public boolean isBoardFull() {
         // check if board is full
         boolean isFull = true;
@@ -38,6 +69,11 @@ public class Board {
         return isFull;
     }
 
+    /**
+     * Check if the board is full
+     * 
+     * @return true if the board is full
+     */
     public synchronized boolean makeMove(int row, int col, char currentPlayer) {
         // place mark
         if ((row >= 0) && (row < 3)) {
@@ -51,6 +87,11 @@ public class Board {
         return false;
     }
 
+    /**
+     * Check if the board is full
+     * 
+     * @return true if the board is full
+     */
     public synchronized boolean makeMove(int position, char currentPlayer) {
         // place mark
         if ((position >= 1) && (position <= 9)) {
@@ -61,6 +102,11 @@ public class Board {
         return false;
     }
 
+    /**
+     * Check if the board is full
+     * 
+     * @return true if the board is full
+     */
     public void printBoard() {
         // print board
         System.out.println("-------------");

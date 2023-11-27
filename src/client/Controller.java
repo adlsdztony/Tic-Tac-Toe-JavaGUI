@@ -14,6 +14,14 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
+/**
+ * Controller class
+ * It contains the controller of the game.
+ * Communicate with the server.
+ * 
+ * @author Zhou Zilong
+ * @version 2023-11-27
+ */
 public class Controller {
 
 	private View view;
@@ -26,19 +34,32 @@ public class Controller {
 	private char player;
 	private String ip;
 
-	final String helpInfo = "Some information about the game:\nCriteria for a valid move:\nThe move is not occupied by any mark.\nThe move is made in the player's turn.\nThe move is made within the 3 x 3 board.\nThe game would continue and switch among the opposite player until it reaches either one of the following conditions:\n-Player 1 wins.\n-Player 2 wins.\n-Draw.";
+	private final String helpInfo = "Some information about the game:\nCriteria for a valid move:\nThe move is not occupied by any mark.\nThe move is made in the player's turn.\nThe move is made within the 3 x 3 board.\nThe game would continue and switch among the opposite player until it reaches either one of the following conditions:\n-Player 1 wins.\n-Player 2 wins.\n-Draw.";
 
+	/**
+	 * Constructor
+	 * Initialize the controller
+	 * 
+	 * @param view
+	 * @param ip
+	 */
 	public Controller(View view, String ip) {
 		this.view = view;
 		this.ip = ip;
 	}
 
+	/**
+	 * Start a new turn
+	 */
 	public void newTurn() {
 		view.getBoardPanel().clearBoard();
 		out.println("start");
 		view.getFrame().repaint();
 	}
 
+	/**
+	 * Start the game
+	 */
 	public void start() {
 		view.getSubmitButton().setEnabled(false);
 		view.getInputField().setEnabled(false);
@@ -119,13 +140,29 @@ public class Controller {
 		handler.start();
 	}
 
+	/**
+	 * ClinetHandler class
+	 * It contains the handler of the client.
+	 * Communicate with the server.
+	 * 
+	 * @version 2023-11-27
+	 */
 	class ClinetHandler extends Thread {
 		private Socket socket;
 
+		/**
+		 * Constructor
+		 * Initialize the handler
+		 * 
+		 * @param socket
+		 */
 		public ClinetHandler(Socket socket) {
 			this.socket = socket;
 		}
 
+		/**
+		 * Run the handler
+		 */
 		@Override
 		public void run() {
 			try {
@@ -135,6 +172,11 @@ public class Controller {
 			}
 		}
 
+		/**
+		 * Read from the server
+		 * 
+		 * @throws Exception
+		 */
 		public void readFromServer() throws Exception {
 			try {
 				view.getInfoLabel().setText("connecting to server...");

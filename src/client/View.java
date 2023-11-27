@@ -5,7 +5,6 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Graphics;
 
-
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -17,82 +16,113 @@ import javax.swing.JTextField;
 
 import game.Board;
 
-
+/**
+ * View class
+ * It contains the GUI of the game.
+ * It contains the board and the current player.
+ * 
+ * @author Zhou Zilong
+ * @since 2023-11-27
+ */
 public class View {
 
-	private JFrame frame;
-	private JPanel[] panels;
+    private JFrame frame;
+    private JPanel[] panels;
 
-	private JLabel info;
+    private JLabel info;
 
-	private JButton submitButton;
-	private JTextField inputField;
-	private BoardPanel boardPanel;
+    private JButton submitButton;
+    private JTextField inputField;
+    private BoardPanel boardPanel;
 
-	public View() {
-		setFrame();
-		setInfoPanel();
-		setBoardPanel();
-		setControlPanel();
-	}
+    /**
+     * Constructor
+     * Initialize the GUI
+     */
+    public View() {
+        setFrame();
+        setInfoPanel();
+        setBoardPanel();
+        setControlPanel();
+    }
 
-	private void setFrame() {
-		frame = new JFrame("Client");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    private void setFrame() {
+        frame = new JFrame("Client");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTitle("Tic Tac Toe");
-		frame.setSize(320, 430);
-		frame.setVisible(true);
+        frame.setSize(320, 430);
+        frame.setVisible(true);
         frame.setResizable(false);
 
-		Container cp = frame.getContentPane();
+        Container cp = frame.getContentPane();
 
-		panels = new JPanel[3];
-		panels[0] = new JPanel();
-		panels[1] = new JPanel();
-		panels[2] = new JPanel();
+        panels = new JPanel[3];
+        panels[0] = new JPanel();
+        panels[1] = new JPanel();
+        panels[2] = new JPanel();
 
-		cp.add(panels[0], "North");
-		cp.add(panels[1], "Center");
-		cp.add(panels[2], "South");
-	}
+        cp.add(panels[0], "North");
+        cp.add(panels[1], "Center");
+        cp.add(panels[2], "South");
+    }
 
+    /**
+     * Get the frame
+     * 
+     * @return the frame
+     */
     public JFrame getFrame() {
         return frame;
     }
 
-	private void setInfoPanel() {
-		info = new JLabel("-");
-		panels[0].add(info);
-	}
+    private void setInfoPanel() {
+        info = new JLabel("-");
+        panels[0].add(info);
+    }
 
-    
-	private void setBoardPanel() {
+    private void setBoardPanel() {
         boardPanel = new BoardPanel();
-		boardPanel.setPreferredSize(new Dimension(300, 300));
-		boardPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		panels[1].add(boardPanel);
-		
-	}
+        boardPanel.setPreferredSize(new Dimension(300, 300));
+        boardPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        panels[1].add(boardPanel);
 
-	private void setControlPanel() {
+    }
 
-		inputField = new JTextField(20);
-		submitButton = new JButton("submit");
+    private void setControlPanel() {
 
-		JPanel panelsContainer = new JPanel();
+        inputField = new JTextField(20);
+        submitButton = new JButton("submit");
 
-		panels[2].setLayout(new BoxLayout(panels[2], BoxLayout.Y_AXIS));
-		panelsContainer.setLayout(new BoxLayout(panelsContainer, BoxLayout.X_AXIS));
+        JPanel panelsContainer = new JPanel();
 
-		panels[2].add(panelsContainer);
-		panelsContainer.add(inputField);
-		panelsContainer.add(submitButton);
-	}
+        panels[2].setLayout(new BoxLayout(panels[2], BoxLayout.Y_AXIS));
+        panelsContainer.setLayout(new BoxLayout(panelsContainer, BoxLayout.X_AXIS));
 
+        panels[2].add(panelsContainer);
+        panelsContainer.add(inputField);
+        panelsContainer.add(submitButton);
+    }
+
+    /**
+     * Show the message
+     * 
+     * @param message
+     */
     public void showMessage(String message) {
         JOptionPane.showMessageDialog(frame, message);
     }
 
+    /**
+     * BoardPanel class
+     * It contains the board of the game.
+     * 
+     * It is a inner class of View.
+     * 
+     * It extends JPanel.
+     * 
+     * @author Zhou Zilong
+     * @since 2023-11-27
+     */
     class BoardPanel extends JPanel {
 
         private static final long serialVersionUID = 1L;
@@ -106,10 +136,20 @@ public class View {
             board = new Board();
         }
 
+        /**
+         * Get the board
+         * 
+         * @return the board
+         */
         public void setBoard(int row, int col, char mark) {
             this.board.makeMove(row, col, mark);
         }
 
+        /**
+         * Get the board
+         * 
+         * @return the board
+         */
         public void clearBoard() {
             this.board = new Board();
         }
@@ -135,7 +175,6 @@ public class View {
             g.drawLine(200, 0, 200, 300);
             g.drawLine(0, 100, 300, 100);
             g.drawLine(0, 200, 300, 200);
-
 
             // draw the marks
             for (int i = 0; i < 3; i++) {
@@ -170,20 +209,39 @@ public class View {
 
     }
 
+    /**
+     * Get the submit button
+     * 
+     * @return the submit button
+     */
+    public JButton getSubmitButton() {
+        return submitButton;
+    }
 
-	public JButton getSubmitButton() {
-		return submitButton;
-	}
+    /**
+     * Get the info label
+     * 
+     * @return the info label
+     */
+    public JLabel getInfoLabel() {
+        return info;
+    }
 
-	public JLabel getInfoLabel() {
-		return info;
-	}
+    /**
+     * Get the input field
+     * 
+     * @return the input field
+     */
+    public JTextField getInputField() {
+        return inputField;
+    }
 
-	public JTextField getInputField() {
-		return inputField;
-	}
-
-	public BoardPanel getBoardPanel() {
-		return boardPanel;
-	}
+    /**
+     * Get the board panel
+     * 
+     * @return the board panel
+     */
+    public BoardPanel getBoardPanel() {
+        return boardPanel;
+    }
 }

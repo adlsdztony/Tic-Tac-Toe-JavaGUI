@@ -2,8 +2,21 @@ package client;
 
 import javax.swing.SwingUtilities;
 
-
+/**
+ * Client class
+ * main function of the client
+ * 
+ * @author Zhou Zilong
+ * @version 2023-11-27
+ */
 public class Client {
+
+	/**
+	 * main function
+	 * take the ip address as the argument
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		String ip;
 		if (args.length != 0) {
