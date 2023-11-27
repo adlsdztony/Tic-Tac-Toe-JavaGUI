@@ -18,7 +18,6 @@ public class Server {
 	private TicTacToe game;
 	private int playerState = 0;
 	int currentPlayer = 0;
-	
 
 	// The set of all the print writers for all the clients, used for broadcast.
 	private Set<PrintWriter> writers = new HashSet<>();
@@ -63,7 +62,7 @@ public class Server {
 					PrintWriter output = new PrintWriter(socket.getOutputStream(), true);
 					output.println("full");
 				}
-				
+
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -114,13 +113,13 @@ public class Server {
 							}
 						}
 						game.changePlayer();
-					} else if (message[0].equals("disconnect")) {
-						return true;
 					} else {
 						output.println("invalid");
 					}
-				}
-				
+				} else if (message[0].equals("disconnect")) {
+						return true;
+				} 
+
 			}
 			return false;
 		}
@@ -128,7 +127,7 @@ public class Server {
 		@Override
 		public void run() {
 			System.out.println("Connected: " + socket);
-			
+
 			try {
 				input = new Scanner(socket.getInputStream());
 				output = new PrintWriter(socket.getOutputStream(), true);
@@ -141,7 +140,7 @@ public class Server {
 				while (input.hasNextLine()) {
 					String[] message = input.nextLine().split(" ");
 					// System.out.println("Server Received: " + message[0]);
-					
+
 					if (message[0].equals("start")) {
 						// System.out.println("Server Sent: start " + player);
 						currentPlayer += 1;
@@ -150,9 +149,10 @@ public class Server {
 						}
 						output.println("start " + player);
 
-						if(newTurn()){
+						if (newTurn()) {
 							break;
-						};
+						}
+						;
 					} else if (message[0].equals("disconnect")) {
 						break;
 					}
@@ -171,6 +171,7 @@ public class Server {
 				for (PrintWriter writer : writers) {
 					writer.println("otherDisconnect");
 				}
+				System.out.println("Disconnected: " + player);
 
 			}
 		}

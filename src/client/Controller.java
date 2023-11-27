@@ -28,25 +28,15 @@ public class Controller {
 
 	final String helpInfo = "Some information about the game:\nCriteria for a valid move:\nThe move is not occupied by any mark.\nThe move is made in the player's turn.\nThe move is made within the 3 x 3 board.\nThe game would continue and switch among the opposite player until it reaches either one of the following conditions:\n-Player 1 wins.\n-Player 2 wins.\n-Draw.";
 
-
-
 	public Controller(View view, String ip) {
 		this.view = view;
 		this.ip = ip;
 	}
 
 	public void newTurn() {
-		// view.getInfoLabel().setText("Please submit your name.");
-		// view.getBoardPanel().setEnabled(false);
-		// view.getSubmitButton().setEnabled(true);
-		// view.getInputField().setEnabled(true);
 		view.getBoardPanel().clearBoard();
 		out.println("start");
 		view.getFrame().repaint();
-	}
-
-	public void disconnect() {
-		out.println("disconnect");
 	}
 
 	public void start() {
@@ -102,7 +92,7 @@ public class Controller {
 		JMenuItem menuItemExit = new JMenuItem("Exit");
 		menuItemExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				disconnect();
+				out.println("disconnect");
 				System.exit(0);
 			}
 		});
@@ -161,6 +151,7 @@ public class Controller {
 				}
 				view.getSubmitButton().setEnabled(true);
 				view.getInputField().setEnabled(true);
+
 				while (in.hasNextLine()) {
 					message = in.nextLine().split(" ");
 					out.flush();
@@ -187,26 +178,21 @@ public class Controller {
 					} else if (message[0].equals("wait")) {
 						view.getInfoLabel().setText("Not your turn. Please wait for the other player to move.");
 					} else if (message[0].equals("win")) {
+						int opt;
 						if (message[1].charAt(0) == player) {
 							view.getInfoLabel().setText("You win!");
-							int opt = JOptionPane.showConfirmDialog(view.getFrame(),
+							opt = JOptionPane.showConfirmDialog(view.getFrame(),
 									"You win! Do you want to play again?", "Game over", JOptionPane.YES_NO_OPTION);
-							if (opt == JOptionPane.YES_OPTION) {
-								out.println("newGame");
-							} else {
-								out.println("disconnect");
-								System.exit(0);
-							}
 						} else {
 							view.getInfoLabel().setText("You lose!");
-							int opt = JOptionPane.showConfirmDialog(view.getFrame(),
+							opt = JOptionPane.showConfirmDialog(view.getFrame(),
 									"You lose! Do you want to play again?", "Game over", JOptionPane.YES_NO_OPTION);
-							if (opt == JOptionPane.YES_OPTION) {
-								out.println("newGame");
-							} else {
-								out.println("disconnect");
-								System.exit(0);
-							}
+						}
+						if (opt == JOptionPane.YES_OPTION) {
+							out.println("newGame");
+						} else {
+							out.println("disconnect");
+							System.exit(0);
 						}
 						newTurn();
 					} else if (message[0].equals("tie")) {

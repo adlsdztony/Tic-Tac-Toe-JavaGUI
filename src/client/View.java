@@ -42,7 +42,7 @@ public class View {
         frame.setTitle("Tic Tac Toe");
 		frame.setSize(320, 430);
 		frame.setVisible(true);
-
+        frame.setResizable(false);
 
 		Container cp = frame.getContentPane();
 
