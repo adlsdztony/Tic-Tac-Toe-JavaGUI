@@ -123,7 +123,7 @@ public class View {
      * @author Zhou Zilong
      * @since 2023-11-27
      */
-    class BoardPanel extends JPanel {
+    public class BoardPanel extends JPanel {
 
         private static final long serialVersionUID = 1L;
         private Board board;

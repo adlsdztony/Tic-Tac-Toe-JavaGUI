@@ -3,7 +3,7 @@
  * tic tac toe game
  */
 module ass4 {
-	requires java.desktop;
+	requires transitive java.desktop;
 
 	exports game;
 	exports client;

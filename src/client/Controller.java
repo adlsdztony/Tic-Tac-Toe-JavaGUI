@@ -186,6 +186,7 @@ public class Controller {
 					view.getInfoLabel().setText("Connected to server.");
 				} else if (message[0].equals("full")) {
 					view.getInfoLabel().setText("Server is full.");
+					view.showMessage("Server is full.");
 					return;
 				} else {
 					view.getInfoLabel().setText("Failed to connect to server.");
