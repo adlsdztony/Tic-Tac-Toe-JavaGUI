@@ -67,10 +67,9 @@ public class Controller {
 			this.socket = new Socket(ip, 12396);
 			this.in = new Scanner(socket.getInputStream());
 			this.out = new PrintWriter(socket.getOutputStream(), true);
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			view.getInfoLabel().setText("Failed to connect to server.");
+			return;
 		}
 
 		boardPanelListener = new MouseListener() {

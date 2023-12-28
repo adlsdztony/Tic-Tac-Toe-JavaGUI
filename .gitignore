@@ -4,3 +4,6 @@ classes/
 *.jar
 doc/
 *.mp4
+game/
+server/
+client/
