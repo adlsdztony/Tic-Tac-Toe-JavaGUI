@@ -1,5 +1,5 @@
 # Tic-Tac-Toe
-A Tic-Tac-Toe game client and server written in Java with GUI.
+An online Tic-Tac-Toe game with client and server written in Java with GUI.
 
 # How to play
 ## 1. Start the server
